@@ -234,8 +234,8 @@ class OpenID_Connect_Generic_Client {
 		$request['headers']['Host'] = $host;
 
 		// attempt the request including the access token in the query string for backwards compatibility
-		$this->logger->log( $this->endpoint_userinfo, 'request_userinfo' );
-		$response = wp_remote_post( $this->endpoint_userinfo, $request );
+		$this->logger->log( $this->endpoint_userinfo.'?access_token='.$access_token, 'request_userinfo' );
+		$response = wp_remote_post( $this->endpoint_userinfo.'?access_token='.$access_token, $request );
 
 		if ( is_wp_error( $response ) ){
 			$response->add( 'request_userinfo' , __( 'Request for userinfo failed.' ) );
